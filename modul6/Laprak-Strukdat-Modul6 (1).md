@@ -325,23 +325,7 @@ int main() {
 
 File `main.cpp` menjadi program utama untuk menerima empat data kendaraan. Sebelum data ditambahkan, program mengecek apakah nomor polisi sudah ada agar tidak terjadi duplikasi. Setelah itu, program menampilkan isi list, mencari kendaraan berdasarkan nomor polisi, dan menghapus kendaraan berdasarkan nomor polisi yang dimasukkan pengguna.
 
-### 4. Cara Kompilasi dan Pengujian
 
-Simpan `Doublylist.h`, `Doublylist.cpp`, dan `main.cpp` dalam folder yang sama. Jalankan perintah berikut di terminal:
-
-```bash
-g++ main.cpp Doublylist.cpp -o main
-./main
-```
-
-Pada Windows, gunakan:
-
-```powershell
-g++ main.cpp Doublylist.cpp -o main.exe
-.\main.exe
-```
-
-Program meminta empat data kendaraan, lalu meminta nomor polisi yang ingin dicari dan dihapus. Untuk menguji pengecekan duplikasi, masukkan nomor polisi yang sama pada dua input berbeda. Program akan menampilkan pesan `nomor polisi sudah terdaftar` dan tidak menambahkan data duplikat.
 
 ---
 
