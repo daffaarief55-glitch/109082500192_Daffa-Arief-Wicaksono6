@@ -1,18 +1,5 @@
-\#
-```{=html}
-<h1 align="center">
-```
-Laporan Praktikum Modul 6 - Doubly Linked List
-```{=html}
-</h1>
-```
-```{=html}
-<p align="center">
-```
-Daffa Arief Wicaksono - 109082500192
-```{=html}
-</p>
-```
+# <h1 align="center">Laporan Praktikum Modul 5 - </h1>
+<p align="center">Daffa Arief Wicaksono- 109082500192</p>
 ## Dasar Teori
 
 ### A. Doubly Linked List
@@ -352,12 +339,9 @@ void deleteAfter(address Prec, address &P);
 
 ```
 
-File `Buku.h` berisi tipe data buku, struktur node, struktur list, dan
-deklarasi fungsi yang digunakan. `First` menunjuk node pertama,
-sedangkan `Last` menunjuk node terakhir. Setiap node memiliki dua
-pointer supaya hubungan antar-node bisa dijalankan dari dua arah.
+File `Buku.h` memuat definisi tipe data buku, struktur node, struktur list, serta deklarasi fungsi yang diperlukan dalam program. Pointer `First` digunakan untuk menunjukkan node paling awal, sementara `Last` menunjuk node paling akhir. Setiap node dilengkapi dua pointer agar hubungan antar-node dapat ditelusuri dari kedua arah.
 
-### 2. Buku.cpp
+
 
 ``` cpp
 
@@ -468,15 +452,7 @@ void deleteAfter(address Prec, address &P) {
 
 ```
 
-Fungsi `insertLast()` menyambungkan node baru ke ujung list. `findElm()`
-mencari kode buku secara berurutan. Pada fungsi penghapusan, pointer
-node yang dilepas dikembalikan melalui parameter `P`, kemudian node
-tersebut bisa dibebaskan dengan `dealokasi()`. Fungsi `deleteAfter()`
-mengikuti prototipe pada soal dan digunakan untuk menghapus node setelah
-`Prec`; karena prototipe tersebut tidak menerima `List`, fungsi ini
-tidak memperbarui `Last` apabila node yang dihapus merupakan node
-terakhir. Pada program pengujian, fungsi ini digunakan untuk menghapus
-node tengah B003.
+Fungsi `insertLast()` berfungsi untuk menambahkan node baru pada bagian paling akhir list. Sementara itu, `findElm()` digunakan untuk mencari kode buku dengan menelusuri node satu per satu. Pada proses penghapusan, alamat node yang dilepas disimpan melalui parameter `P`, kemudian memorinya dapat dibebaskan menggunakan `dealokasi()`. Fungsi `deleteAfter()` dibuat sesuai dengan prototipe yang ditentukan pada soal untuk menghapus node setelah `Prec`. Namun, karena fungsi tersebut tidak menerima parameter `List`, perubahan pointer `Last` tidak dapat dilakukan jika node yang dihapus berada di posisi terakhir. Dalam program pengujian, fungsi ini digunakan untuk menghapus node tengah dengan kode buku B003.
 
 ### 3. main.cpp
 
@@ -578,26 +554,9 @@ int main() {
 
 ![output2](https://github.com/daffaarief55-glitch/109082500192_Daffa-Arief-Wicaksono6/blob/main/modul6/output_unguided/output2.png?raw=true)
 
+Program `main.cpp` berfungsi untuk menjalankan berbagai operasi pada Doubly Linked List yang berisi data buku. Pertama, program membuat list dalam keadaan kosong, lalu meminta pengguna memasukkan empat data buku melalui fungsi `inputData()`. Sebelum data disimpan, kode buku diperiksa terlebih dahulu menggunakan `findElm()` untuk memastikan tidak ada kode yang sama. Setelah itu, seluruh data ditampilkan dan pengguna dapat mencari buku berdasarkan kode yang dimasukkan. Program juga menyediakan fitur penghapusan data dengan menyesuaikan posisi node, baik di bagian pertama, terakhir, maupun di antara node lainnya. Setelah node berhasil dilepaskan dari list, memorinya dibersihkan menggunakan `dealokasi()`. Terakhir, program menampilkan kembali isi list untuk memperlihatkan perubahan setelah penghapusan.
 
 
-File `main.cpp` menjadi bagian untuk memasukkan data buku, memeriksa
-duplikasi kode, menampilkan list, mencari buku berdasarkan kode, dan
-menghapus buku yang dipilih. Jika buku yang dihapus berada di awal atau
-akhir, program memanggil fungsi penghapusan yang sesuai. Jika berada di
-tengah, program menggunakan `deleteAfter()` dengan node sebelumnya
-sebagai `Prec`.
-
-
-Selanjutnya, masukkan `B001` sebagai kode yang dicari. Program akan
-menampilkan data buku Algoritma. Untuk menguji penghapusan sesuai soal,
-masukkan `B003`. Setelah penghapusan, list berisi B001 dan B004. Urutan
-tampilan mengikuti arah penelusuran dari `First` ke `Last`, sehingga
-hasilnya mengikuti urutan penambahan `insertLast()`.
-
-Catatan: contoh keluaran pada PDF menampilkan data dalam urutan
-terbalik, sedangkan ADT yang diminta menggunakan `insertLast()`.
-Implementasi laporan ini mengikuti fungsi `insertLast()` secara
-konvensional, sehingga penampilan list dimulai dari node `First`.
 
 ## Kesimpulan
 
