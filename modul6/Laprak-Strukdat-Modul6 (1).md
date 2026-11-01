@@ -572,6 +572,9 @@ int main() {
 }
 
 ```
+##### Output 1
+![output1](https://github.com/daffaarief55-glitch/109082500192_Daffa-Arief-Wicaksono5/blob/main/modul5/output_undguided/output1.png?raw=true)
+
 
 File `main.cpp` menjadi bagian untuk memasukkan data buku, memeriksa
 duplikasi kode, menampilkan list, mencari buku berdasarkan kode, dan
