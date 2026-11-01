@@ -574,6 +574,7 @@ int main() {
 ```
 ##### Output 1
 ![output1](https://github.com/daffaarief55-glitch/109082500192_Daffa-Arief-Wicaksono6/blob/main/modul6/output_unguided/output1.png?raw=true)
+
 ![output2](https://github.com/daffaarief55-glitch/109082500192_Daffa-Arief-Wicaksono6/blob/main/modul6/output_unguided/output2.png.png?raw=true)
 
 
