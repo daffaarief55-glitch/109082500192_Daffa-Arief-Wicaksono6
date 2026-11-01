@@ -15,20 +15,35 @@ Daffa Arief Wicaksono - 109082500192
 ```
 ## Dasar Teori
 
-### Doubly Linked List merupakan struktur data linear yang terdiri dari beberapa elemen atau node. Setiap node berisi data dan dua pointer, yaitu next yang mengarah ke node selanjutnya dan prev yang mengarah ke node sebelumnya. Dengan adanya kedua pointer tersebut, proses penelusuran data dapat dilakukan dari depan ke belakang maupun sebaliknya [1].
-1. Struktur Elemen pada Doubly Linked List
-Setiap node memiliki informasi yang disesuaikan dengan data yang digunakan dalam praktikum. Pada bagian Guided, data kendaraan terdiri dari nopol, warna, dan thnBuat. Sementara itu, pada bagian Unguided, data buku terdiri dari kodeBuku, judul, dan thnTerbit. Kedua jenis data tersebut menggunakan pointer next dan prev untuk menghubungkan setiap node, serta First dan Last sebagai penanda elemen pertama dan terakhir. Jika list belum memiliki data, kedua penunjuk tersebut bernilai nullptr atau Nil.
-2. Pointer dan Alokasi Memori
-Pointer merupakan variabel yang digunakan untuk menyimpan alamat memori suatu objek. Dalam Doubly Linked List, pointer berperan sebagai penghubung antar-node sehingga data tidak harus disimpan secara berurutan di memori. Fungsi alokasi() digunakan untuk membuat node baru menggunakan new, mengisi data, serta mengatur pointer next dan prev dengan nilai nullptr. Sementara itu, fungsi dealokasi() menggunakan delete untuk melepaskan memori dari node yang sudah tidak diperlukan [2][3].
-3. Penambahan Elemen di Akhir List
-Fungsi insertLast() digunakan untuk menambahkan node baru pada posisi paling akhir. Apabila list masih kosong, node tersebut akan menjadi elemen pertama sekaligus terakhir. Namun, jika list sudah berisi data, node terakhir akan dihubungkan dengan node baru melalui pointer next, sedangkan pointer prev pada node baru diarahkan ke node sebelumnya. Selanjutnya, posisi Last diperbarui agar menunjuk ke node yang baru ditambahkan.
-B. Operasi pada Doubly Linked List
-1. Searching atau Pencarian Elemen
-Searching merupakan proses menemukan data tertentu dengan memeriksa setiap node dalam list. Fungsi findElm() melakukan pencarian mulai dari node pertama (First), kemudian mencocokkan nilai kodeBuku dengan data yang dicari. Apabila ditemukan, fungsi akan mengembalikan alamat node tersebut. Jika tidak ditemukan, fungsi mengembalikan nilai nullptr.
-2. Penghapusan Elemen
-Operasi penghapusan dilakukan dengan mengatur kembali hubungan pointer agar node yang dihapus tidak lagi terhubung dengan list. Fungsi deleteFirst() digunakan untuk menghapus node pertama dan memperbarui posisi First. Fungsi deleteLast() menghapus node terakhir dengan memperbarui Last, sedangkan deleteAfter() berfungsi menghapus node yang berada tepat setelah node Prec. Dalam proses ini, hubungan antara pointer next dan prev harus diperhatikan agar susunan list tetap terhubung dengan baik, termasuk ketika list hanya memiliki satu node [1].
-3. Implementasi ADT dengan C++
-Pembuatan program Doubly Linked List dibagi menjadi tiga file, yaitu Buku.h sebagai tempat deklarasi tipe data dan fungsi, Buku.cpp untuk menuliskan implementasi setiap fungsi, serta main.cpp sebagai program utama untuk menjalankan dan menguji seluruh operasi. Pemisahan file tersebut membuat kode lebih terstruktur dan mudah dikelola. Selain itu, program dilengkapi pengecekan kode buku sebelum proses penambahan dilakukan untuk mencegah adanya data dengan kode yang sama sesuai ketentuan praktikum.
+### A. Doubly Linked List
+
+Doubly Linked List merupakan struktur data linear yang tersusun dari beberapa elemen atau node. Setiap node menyimpan data dan dua pointer, yaitu `next` yang mengarah ke node selanjutnya dan `prev` yang mengarah ke node sebelumnya. Dengan adanya kedua pointer tersebut, proses penelusuran data dapat dilakukan dari depan ke belakang maupun sebaliknya [1].
+
+#### 1. Struktur Elemen pada Doubly Linked List
+
+Setiap node memiliki informasi yang disesuaikan dengan data yang digunakan dalam praktikum. Pada bagian Guided, data kendaraan terdiri dari `nopol`, `warna`, dan `thnBuat`. Sementara itu, pada bagian Unguided, data buku terdiri dari `kodeBuku`, `judul`, dan `thnTerbit`. Kedua jenis data tersebut menggunakan pointer `next` dan `prev` untuk menghubungkan setiap node, serta `First` dan `Last` sebagai penanda elemen pertama dan terakhir. Jika list belum memiliki data, kedua penunjuk tersebut bernilai `nullptr` atau `Nil`.
+
+#### 2. Pointer dan Alokasi Memori
+
+Pointer merupakan variabel yang digunakan untuk menyimpan alamat memori suatu objek. Dalam Doubly Linked List, pointer berperan sebagai penghubung antar-node sehingga data tidak harus disimpan secara berurutan di memori. Fungsi `alokasi()` digunakan untuk membuat node baru menggunakan `new`, mengisi data, serta mengatur pointer `next` dan `prev` dengan nilai `nullptr`. Sementara itu, fungsi `dealokasi()` menggunakan `delete` untuk melepaskan memori dari node yang sudah tidak diperlukan [2][3].
+
+#### 3. Penambahan Elemen di Akhir List
+
+Fungsi `insertLast()` digunakan untuk menambahkan node baru pada posisi paling akhir. Apabila list masih kosong, node tersebut akan menjadi elemen pertama sekaligus terakhir. Namun, jika list sudah berisi data, node terakhir akan dihubungkan dengan node baru melalui pointer `next`, sedangkan pointer `prev` pada node baru diarahkan ke node sebelumnya. Selanjutnya, posisi `Last` diperbarui agar menunjuk ke node yang baru ditambahkan.
+
+### B. Operasi pada Doubly Linked List
+
+#### 1. Searching atau Pencarian Elemen
+
+Searching merupakan proses menemukan data tertentu dengan memeriksa setiap node dalam list. Fungsi `findElm()` melakukan pencarian mulai dari node pertama (`First`), kemudian mencocokkan nilai `kodeBuku` dengan data yang dicari. Apabila ditemukan, fungsi akan mengembalikan alamat node tersebut. Jika tidak ditemukan, fungsi mengembalikan nilai `nullptr`.
+
+#### 2. Penghapusan Elemen
+
+Operasi penghapusan dilakukan dengan mengatur kembali hubungan pointer agar node yang dihapus tidak lagi terhubung dengan list. Fungsi `deleteFirst()` digunakan untuk menghapus node pertama dan memperbarui posisi `First`. Fungsi `deleteLast()` menghapus node terakhir dengan memperbarui `Last`, sedangkan `deleteAfter()` berfungsi menghapus node yang berada tepat setelah node `Prec`. Dalam proses ini, hubungan antara pointer `next` dan `prev` harus diperhatikan agar susunan list tetap terhubung dengan baik, termasuk ketika list hanya memiliki satu node [1].
+
+#### 3. Implementasi ADT dengan C++
+
+Pembuatan program Doubly Linked List dibagi menjadi tiga file, yaitu `Buku.h` sebagai tempat deklarasi tipe data dan fungsi, `Buku.cpp` untuk menuliskan implementasi setiap fungsi, serta `main.cpp` sebagai program utama untuk menjalankan dan menguji seluruh operasi. Pemisahan file tersebut membuat kode lebih terstruktur dan mudah dikelola. Selain itu, program dilengkapi pengecekan kode buku sebelum proses penambahan dilakukan untuk mencegah adanya data dengan kode yang sama sesuai ketentuan praktikum.
 
 ## Guided
 
