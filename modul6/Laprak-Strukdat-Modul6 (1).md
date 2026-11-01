@@ -350,43 +350,50 @@ Program meminta empat data kendaraan, lalu meminta nomor polisi yang ingin dicar
 ### 1. Buku.h
 
 ``` cpp
+
 #ifndef BUKU_H
 #define BUKU_H
 
+#include <iostream>
 #include <string>
 using namespace std;
 
-struct buku {
+typedef struct buku {
     string kodeBuku;
     string judul;
     int thnTerbit;
-};
+} infotype;
 
-typedef buku infotype;
 typedef struct ElmList *address;
 
-struct ElmList {
+typedef struct ElmList {
     infotype info;
     address next;
     address prev;
-};
+} ElmList;
 
-struct List {
+typedef struct List {
     address First;
     address Last;
-};
+} List;
 
+// ADT Doubly Linked List
 void CreateList(List &L);
 address alokasi(infotype x);
 void dealokasi(address &P);
-void printInfo(const List &L);
+void printInfo(List L);
 void insertLast(List &L, address P);
-address findElm(const List &L, const infotype &x);
+
+// Searching
+address findElm(List L, infotype x);
+
+// Delete
 void deleteFirst(List &L, address &P);
 void deleteLast(List &L, address &P);
 void deleteAfter(address Prec, address &P);
 
 #endif
+
 ```
 
 File `Buku.h` berisi tipe data buku, struktur node, struktur list, dan
@@ -397,9 +404,8 @@ pointer supaya hubungan antar-node bisa dijalankan dari dua arah.
 ### 2. Buku.cpp
 
 ``` cpp
-#include <iostream>
+
 #include "Buku.h"
-using namespace std;
 
 void CreateList(List &L) {
     L.First = nullptr;
@@ -408,110 +414,92 @@ void CreateList(List &L) {
 
 address alokasi(infotype x) {
     address P = new ElmList;
+
     P->info = x;
     P->next = nullptr;
     P->prev = nullptr;
+
     return P;
 }
 
 void dealokasi(address &P) {
-    if (P != nullptr) {
-        delete P;
-        P = nullptr;
-    }
+    delete P;
+    P = nullptr;
 }
 
-void printInfo(const List &L) {
+void printInfo(List L) {
     address P = L.First;
 
-    if (P == nullptr) {
-        cout << "List buku kosong." << endl;
-        return;
-    }
-
     while (P != nullptr) {
-        cout << "Kode Buku    : " << P->info.kodeBuku << endl;
-        cout << "Judul        : " << P->info.judul << endl;
-        cout << "Tahun Terbit : " << P->info.thnTerbit << endl;
+        cout << "kode buku     : " << P->info.kodeBuku << endl;
+        cout << "judul         : " << P->info.judul << endl;
+        cout << "tahun         : " << P->info.thnTerbit << endl;
+
         P = P->next;
     }
 }
 
 void insertLast(List &L, address P) {
-    if (P == nullptr) {
-        return;
-    }
-
-    P->next = nullptr;
-    P->prev = L.Last;
-
     if (L.First == nullptr) {
         L.First = P;
         L.Last = P;
     } else {
+        P->prev = L.Last;
         L.Last->next = P;
         L.Last = P;
     }
 }
 
-address findElm(const List &L, const infotype &x) {
+address findElm(List L, infotype x) {
     address P = L.First;
 
     while (P != nullptr) {
         if (P->info.kodeBuku == x.kodeBuku) {
             return P;
         }
+
         P = P->next;
     }
 
     return nullptr;
 }
 
+// Menghapus elemen pertama
 void deleteFirst(List &L, address &P) {
-    if (L.First == nullptr) {
-        P = nullptr;
-        return;
-    }
-
     P = L.First;
-    L.First = P->next;
 
-    if (L.First != nullptr) {
-        L.First->prev = nullptr;
-    } else {
-        L.Last = nullptr;
-    }
-
-    P->next = nullptr;
-    P->prev = nullptr;
-}
-
-void deleteLast(List &L, address &P) {
-    if (L.Last == nullptr) {
-        P = nullptr;
-        return;
-    }
-
-    P = L.Last;
-    L.Last = P->prev;
-
-    if (L.Last != nullptr) {
-        L.Last->next = nullptr;
-    } else {
+    if (L.First == L.Last) {
         L.First = nullptr;
+        L.Last = nullptr;
+    } else {
+        L.First = P->next;
+        L.First->prev = nullptr;
     }
 
     P->next = nullptr;
     P->prev = nullptr;
 }
 
-void deleteAfter(address Prec, address &P) {
-    if (Prec == nullptr || Prec->next == nullptr) {
-        P = nullptr;
-        return;
+// Menghapus elemen terakhir
+void deleteLast(List &L, address &P) {
+    P = L.Last;
+
+    if (L.First == L.Last) {
+        L.First = nullptr;
+        L.Last = nullptr;
+    } else {
+        L.Last = P->prev;
+        L.Last->next = nullptr;
     }
 
+    P->next = nullptr;
+    P->prev = nullptr;
+}
+
+// Menghapus elemen setelah Prec
+void deleteAfter(address Prec, address &P) {
     P = Prec->next;
+
     Prec->next = P->next;
 
     if (P->next != nullptr) {
@@ -521,6 +509,7 @@ void deleteAfter(address Prec, address &P) {
     P->next = nullptr;
     P->prev = nullptr;
 }
+
 ```
 
 Fungsi `insertLast()` menyambungkan node baru ke ujung list. `findElm()`
@@ -536,92 +525,96 @@ node tengah B003.
 ### 3. main.cpp
 
 ``` cpp
+
 #include <iostream>
-#include <limits>
 #include "Buku.h"
 using namespace std;
+
+void inputData(List &L) {
+    infotype data;
+    address P;
+
+    cout << "masukkan kode buku: ";
+    cin >> data.kodeBuku;
+
+    cout << "masukkan judul buku: ";
+    cin >> data.judul;
+
+    cout << "masukkan tahun terbit: ";
+    cin >> data.thnTerbit;
+
+    cout << endl;
+
+    if (findElm(L, data) == nullptr) {
+        P = alokasi(data);
+        insertLast(L, P);
+    } else {
+        cout << "kode buku sudah terdaftar" << endl;
+    }
+}
 
 int main() {
     List L;
     CreateList(L);
 
-    int jumlahData;
-    cout << "Jumlah data buku yang ingin dimasukkan: ";
-    cin >> jumlahData;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    address P;
+    infotype cari;
 
-    for (int i = 0; i < jumlahData; i++) {
-        infotype data;
+    // LATIHAN 1: INPUT DATA
+    inputData(L);
+    inputData(L);
+    inputData(L);
+    inputData(L);
 
-        cout << "\nMasukkan kode buku: ";
-        getline(cin, data.kodeBuku);
+    cout << "\nDATA LIST 1" << endl;
+    printInfo(L);
 
-        cout << "Masukkan judul buku: ";
-        getline(cin, data.judul);
+    // LATIHAN 2: SEARCHING
+    cout << "\nMasukkan Kode Buku yang dicari : ";
+    cin >> cari.kodeBuku;
 
-        cout << "Masukkan tahun terbit: ";
-        cin >> data.thnTerbit;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    P = findElm(L, cari);
 
-        if (findElm(L, data) != nullptr) {
-            cout << "kode buku sudah terdaftar" << endl;
+    if (P != nullptr) {
+        cout << "\nKode Buku    : " << P->info.kodeBuku << endl;
+        cout << "Judul        : " << P->info.judul << endl;
+        cout << "Tahun Terbit : " << P->info.thnTerbit << endl;
+    } else {
+        cout << "Data buku tidak ditemukan." << endl;
+    }
+
+    // LATIHAN 3: DELETE
+    cout << "\nMasukkan Kode Buku yang akan dihapus : ";
+    cin >> cari.kodeBuku;
+
+    P = findElm(L, cari);
+
+    if (P != nullptr) {
+        if (P == L.First) {
+            deleteFirst(L, P);
+        } else if (P == L.Last) {
+            deleteLast(L, P);
         } else {
-            insertLast(L, alokasi(data));
+            deleteAfter(P->prev, P);
         }
+
+        dealokasi(P);
+
+        cout << "Data dengan kode buku "
+             << cari.kodeBuku
+             << " berhasil dihapus." << endl;
+    } else {
+        cout << "Data dengan kode buku "
+             << cari.kodeBuku
+             << " tidak ditemukan." << endl;
     }
 
     cout << "\nDATA LIST 1" << endl;
     printInfo(L);
 
-    infotype cari;
-    cout << "\nMasukkan Kode Buku yang dicari : ";
-    getline(cin, cari.kodeBuku);
-
-    address hasil = findElm(L, cari);
-    if (hasil != nullptr) {
-        cout << "\nKode Buku    : " << hasil->info.kodeBuku << endl;
-        cout << "Judul        : " << hasil->info.judul << endl;
-        cout << "Tahun Terbit : " << hasil->info.thnTerbit << endl;
-    } else {
-        cout << "Data buku tidak ditemukan." << endl;
-    }
-
-    infotype hapus;
-    cout << "\nMasukkan Kode Buku yang akan dihapus : ";
-    getline(cin, hapus.kodeBuku);
-
-    address target = findElm(L, hapus);
-    if (target == nullptr) {
-        cout << "Data buku tidak ditemukan." << endl;
-    } else {
-        address P = nullptr;
-
-        if (target == L.First) {
-            deleteFirst(L, P);
-        } else if (target == L.Last) {
-            deleteLast(L, P);
-        } else {
-            deleteAfter(target->prev, P);
-        }
-
-        if (P != nullptr) {
-            cout << "Data dengan kode buku " << P->info.kodeBuku
-                 << " berhasil dihapus." << endl;
-            dealokasi(P);
-        }
-    }
-
-    cout << "\nDATA LIST 1 SETELAH PENGHAPUSAN" << endl;
-    printInfo(L);
-
-    while (L.First != nullptr) {
-        address P = nullptr;
-        deleteFirst(L, P);
-        dealokasi(P);
-    }
-
     return 0;
 }
+
 ```
 
 File `main.cpp` menjadi bagian untuk memasukkan data buku, memeriksa
@@ -631,56 +624,6 @@ akhir, program memanggil fungsi penghapusan yang sesuai. Jika berada di
 tengah, program menggunakan `deleteAfter()` dengan node sebelumnya
 sebagai `Prec`.
 
-### 4. Cara Kompilasi dan Pengujian
-
-Simpan ketiga file dalam folder yang sama, kemudian jalankan perintah
-berikut pada terminal yang berada di folder tersebut:
-
-``` bash
-g++ main.cpp Buku.cpp -o main
-./main
-```
-
-Pada Windows, program dapat dijalankan dengan:
-
-``` powershell
-g++ main.cpp Buku.cpp -o main.exe
-.\main.exe
-```
-
-Contoh pengujian berdasarkan data pada modul:
-
-``` text
-Jumlah data buku yang ingin dimasukkan: 4
-
-Masukkan kode buku: B001
-Masukkan judul buku: Algoritma
-Masukkan tahun terbit: 2020
-
-Masukkan kode buku: B003
-Masukkan judul buku: Struktur_Data
-Masukkan tahun terbit: 2018
-
-Masukkan kode buku: B001
-Masukkan judul buku: Basis_Data
-Masukkan tahun terbit: 2021
-kode buku sudah terdaftar
-
-Masukkan kode buku: B004
-Masukkan judul buku: Jaringan_Komputer
-Masukkan tahun terbit: 2022
-
-DATA LIST 1
-Kode Buku    : B001
-Judul        : Algoritma
-Tahun Terbit : 2020
-Kode Buku    : B003
-Judul        : Struktur_Data
-Tahun Terbit : 2018
-Kode Buku    : B004
-Judul        : Jaringan_Komputer
-Tahun Terbit : 2022
-```
 
 Selanjutnya, masukkan `B001` sebagai kode yang dicari. Program akan
 menampilkan data buku Algoritma. Untuk menguji penghapusan sesuai soal,
