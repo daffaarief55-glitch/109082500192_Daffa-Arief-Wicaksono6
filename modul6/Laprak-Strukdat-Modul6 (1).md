@@ -575,6 +575,7 @@ int main() {
 ##### Output 1
 ![output1](https://github.com/daffaarief55-glitch/109082500192_Daffa-Arief-Wicaksono6/blob/main/modul6/output_unguided/output1.png?raw=true)
 
+##### Output 2
 ![output2](https://github.com/daffaarief55-glitch/109082500192_Daffa-Arief-Wicaksono6/blob/main/modul6/output_unguided/output2.png.png?raw=true)
 
 
@@ -600,15 +601,7 @@ konvensional, sehingga penampilan list dimulai dari node `First`.
 
 ## Kesimpulan
 
-Berdasarkan praktikum Modul 6, Doubly Linked List merupakan struktur
-data yang menghubungkan setiap node dengan node sebelum dan sesudahnya
-melalui pointer `prev` dan `next`. Pointer `First` dan `Last` membantu
-mengelola node pertama serta node terakhir. Melalui implementasi ADT
-pada C++, praktikum ini melatih pembuatan node, penambahan data di akhir
-list, pemeriksaan duplikasi kode buku, pencarian dengan `findElm()`,
-serta penghapusan elemen di awal, akhir, dan setelah node tertentu. Saat
-menghapus data, hubungan pointer harus diperbarui agar list tetap
-tersambung dan memori node yang dihapus dapat dibebaskan.
+Berdasarkan kegiatan praktikum Modul 6, Doubly Linked List adalah struktur data yang setiap node-nya saling terhubung dengan node sebelumnya dan berikutnya menggunakan pointer `prev` dan `next`. Pengelolaan node pertama dan terakhir dilakukan melalui pointer `First` dan `Last`. Pada praktikum ini, penerapan ADT menggunakan C++ mencakup proses pembuatan node, penambahan data pada bagian akhir list, pengecekan kode buku yang sama, pencarian data menggunakan `findElm()`, serta penghapusan node dari bagian awal, akhir, maupun setelah node tertentu. Ketika proses penghapusan dilakukan, pointer perlu diatur kembali agar hubungan antar-node tetap terjaga dan memori yang digunakan oleh node tersebut dapat dibebaskan.
 
 ## Referensi
 
