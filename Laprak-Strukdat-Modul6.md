@@ -1,19 +1,4 @@
-\#
-```{=html}
-<h1 align="center">
-```
-Laporan Praktikum Modul 6 - Doubly Linked List
-```{=html}
-</h1>
-```
-```{=html}
-<p align="center">
-```
-Daffa Arief Wicaksono - 109082500192
-```{=html}
-</p>
-```
-## Dasar Teori
+
 
 ### A. Doubly Linked List
 
