@@ -1,4 +1,4 @@
-# <h1 align="center">Laporan Praktikum Modul 5 - </h1>
+# <h1 align="center">Laporan Praktikum Modul 6 - </h1>
 <p align="center">Daffa Arief Wicaksono- 109082500192</p>
 ## Dasar Teori
 
